@@ -1,4 +1,3 @@
-package Manymore1;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
