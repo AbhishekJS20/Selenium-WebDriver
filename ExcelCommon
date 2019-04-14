@@ -1,0 +1,41 @@
+package com.myntra.common.ib;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.openqa.selenium.WebDriver;
+
+public class ExcelCommon 
+{
+	WebDriver d;
+	public String path="G:\\Program\\Myntra Project\\src\\testdata\\Myntra Senirio.xlsx"; 
+	public void getdata(String sheet, int row,int col) throws Throwable
+	{
+		FileInputStream fls=new FileInputStream(path);
+		Workbook wb=WorkbookFactory.create(fls);
+		Sheet sh=wb.getSheet(sheet);
+		Row row1=sh.getRow(row);
+		String data=row1.getCell(col).getStringCellValue();			
+	}
+	
+	public void setdata(String sheet,int col) throws Throwable
+	{
+		String data="PASS";
+		int row=5;
+		FileInputStream fis=new FileInputStream(path);
+		Workbook wb=WorkbookFactory.create(fis);
+		Sheet sh=wb.getSheet(sheet);
+		Row row2=sh.getRow(row);
+		Cell cel=row2.getCell(col);
+		cel.setCellValue(data);
+		FileOutputStream fos=new FileOutputStream(path);
+		wb.write(fos);
+		wb.close();	
+	}
+}
